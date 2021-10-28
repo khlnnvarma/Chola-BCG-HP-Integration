@@ -1,0 +1,68 @@
+<wsdl:definitions
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://schemas.cordys.com/BCGHPWSApp"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:cordys="http://schemas.cordys.com/General/1.0/" name="BCGHPWS" targetNamespace="http://schemas.corgetdys.com/BCGHPWSApp">
+	<wsdl:types>
+		<xsd:schema
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			xmlns:wcp="http://schemas.cordys.com/"
+			xmlns="" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.cordys.com/BCGHPWSApp">
+			<xsd:import namespace="http://schemas.cordys.com/General/1.0/" schemaLocation="https://bpm.cholainsurance.com/cordys/WSDLGateway.wcp?service=http://schemas.cordys.com/CordysSchemas//CordysFaultDetails.xsd&amp;organization=o=CholaMSUnderwritingOps,cn=cordys,cn=CMSProdInst,o=cholamandalamins.com"/>
+			<xsd:include schemaLocation="https://bpm.cholainsurance.com/cordys/WSDLGateway.wcp?service=http://schemas.cordys.com/WS-AppServer/1.0/WSAppServerSchema.xsd&amp;organization=o=CholaMSUnderwritingOps,cn=cordys,cn=CMSProdInst,o=cholamandalamins.com"/>
+			<xsd:element name="ProposalDocumentPush">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="data" type="xsd:anyType"/>
+					</xsd:sequence>
+					<xsd:attributeGroup ref="tns:GetMethodAttributes"/>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="ProposalDocumentPushResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="return" type="xsd:anyType"/>
+					</xsd:sequence>
+					<xsd:attributeGroup ref="tns:GetMethodAttributes"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="ProposalDocumentPushInput">
+		<wsdl:part name="body" element="tns:ProposalDocumentPush"/>
+	</wsdl:message>
+	<wsdl:message name="ProposalDocumentPushOutput">
+		<wsdl:part name="body" element="tns:ProposalDocumentPushResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ProposalDocumentPushFaultDetail">
+		<wsdl:part name="FaultDetail" element="cordys:FaultDetails"/>
+		<wsdl:part name="FaultRelatedException" element="cordys:FaultRelatedException"/>
+	</wsdl:message>
+	<wsdl:portType name="BCGHPWSI">
+		<wsdl:operation name="ProposalDocumentPush">
+			<wsdl:input message="tns:ProposalDocumentPushInput"/>
+			<wsdl:output message="tns:ProposalDocumentPushOutput"/>
+			<wsdl:fault name="FaultDetail" message="tns:ProposalDocumentPushFaultDetail"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BCGHPWSI" type="tns:BCGHPWSI">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ProposalDocumentPush">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="FaultDetail">
+				<soap:fault name="FaultDetail" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BCGHPWSIService">
+		<wsdl:port name="BCGHPWSI" binding="tns:BCGHPWSI">
+			<soap:address location="https://bpm.cholainsurance.com/cordys/com.eibus.web.soap.Gateway.wcp?organization=o=CholaMSUnderwritingOps,cn=cordys,cn=CMSProdInst,o=cholamandalamins.com"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
