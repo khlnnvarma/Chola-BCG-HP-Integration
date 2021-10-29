@@ -11,6 +11,10 @@ public class BcgHpRestSoapIntegrationApplication {
 	ConfigurableApplicationContext configurableApplicationContext=	SpringApplication.run(BcgHpRestSoapIntegrationApplication.class, args);
 	
 	configurableApplicationContext.close();
+	
+	int a=1;
+	int b=2;
+	System.out.println(a+b);
 	}
 
 }
