@@ -9,6 +9,7 @@ public class BcgHpRestSoapIntegrationApplication {
 
 	public static void main(String[] args) {
 	ConfigurableApplicationContext configurableApplicationContext=	SpringApplication.run(BcgHpRestSoapIntegrationApplication.class, args);
+	configurableApplicationContext.close();
 	}
 
 }
